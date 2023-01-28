@@ -3,6 +3,7 @@ package global
 import (
 	"blog-service/pkg/setting"
 	"fmt"
+	otgorm "github.com/eddycjy/opentracing-gorm"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"time"
@@ -45,6 +46,8 @@ func NewDBEngine(dbs *setting.DatabaseSettingS)(*gorm.DB, error){
 	db.DB().SetMaxIdleConns(dbs.MaxIdleConns)
 	db.DB().SetMaxOpenConns(dbs.MaxOpenConns)
 
+
+	otgorm.AddGormCallbacks(db)
 	return db, nil
 }
 func updateTimeStampForCreateCallback(scope *gorm.Scope){
