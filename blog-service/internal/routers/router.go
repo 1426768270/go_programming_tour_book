@@ -59,7 +59,7 @@ func NewRouter() *gin.Engine {
 	upload := api.NewUpload()
 	r.POST("/upload/file", upload.UploadFile)
 	// 认证接口
-	r.POST("/auth", api.GetAuth)
+	r.GET("/auth", api.GetAuth)
 
 	// 静态资源
 	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
